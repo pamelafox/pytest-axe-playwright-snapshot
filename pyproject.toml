@@ -28,11 +28,12 @@ Home = "https://github.com/pamelafox/pytest-axe-playwright-snapshot"
 
 [project.optional-dependencies]
 dev = [
-    "tox",
     "pytest",
     "pytest-cov",
     "pytest-playwright",
-    "pre-commit"
+    "pre-commit",
+    "ruff",
+    "black",
 ]
 
 [project.entry-points.pytest11]
