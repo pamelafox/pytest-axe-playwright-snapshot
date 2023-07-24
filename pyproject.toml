@@ -1,0 +1,57 @@
+[project]
+name = "pytest-axe-playwright-snapshot"
+description = "A pytest plugin that runs Axe-core on Playwright pages and takes snapshots of the results."
+version = "0.0.1"
+authors = [{name = "Pamela Fox"}]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {file = "LICENSE"}
+dependencies = [
+    "pytest",
+    "axe-playwright-python",
+    "playwright",
+    "pytest-snapshot @ git+https://github.com/pamelafox/pytest-snapshot.git@addcallback"
+    ]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Framework :: Pytest"
+    ]
+
+[project.urls]
+Home = "https://github.com/pamelafox/pytest-axe-playwright-snapshot"
+
+[project.optional-dependencies]
+dev = [
+    "tox",
+    "pytest",
+    "pytest-cov",
+    "pytest-playwright",
+    "pre-commit"
+]
+
+[project.entry-points.pytest11]
+axe_playwright_snapshot = "pytest_axe_playwright_snapshot"
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "pytest_axe_playwright_snapshot"
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+select = ["E", "F", "I", "UP"]
+ignore = ["D203"]
+show-source = true
+
+[tool.black]
+line-length = 120
+target-version = ["py38"]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
