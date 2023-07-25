@@ -1,7 +1,7 @@
 [project]
 name = "pytest-axe-playwright-snapshot"
 description = "A pytest plugin that runs Axe-core on Playwright pages and takes snapshots of the results."
-version = "0.0.4"
+version = "0.0.5"
 authors = [{name = "Pamela Fox"}]
 requires-python = ">=3.8"
 readme = "README.md"
@@ -52,7 +52,7 @@ name = "pytest_axe_playwright_snapshot"
 line-length = 120
 target-version = "py38"
 select = ["E", "F", "I", "UP"]
-ignore = ["D203"]
+ignore = ["D203", "E501"]
 show-source = true
 
 [tool.black]
@@ -61,9 +61,6 @@ target-version = ["py38"]
 
 [tool.pytest.ini_options]
 addopts = "-ra --cov"
-
-[tool.coverage.run]
-branch = true
 
 [tool.coverage.report]
 show_missing = true

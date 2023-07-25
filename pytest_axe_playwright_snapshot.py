@@ -8,6 +8,8 @@ from playwright.sync_api import Page
 def snapshot_to_dict(snapshot: str):
     snapshot_counts = {}
     for line in snapshot.split("\n"):
+        if len(line) == 0:
+            continue
         key, count = line.split(" : ")
         snapshot_counts[key] = int(count)
     return snapshot_counts
@@ -32,8 +34,10 @@ def compare_violations(new_snapshot, old_snapshot, new_results):
     good_msg = "That's good news! 🎉 Run `pytest --snapshot-update` to update the snapshots.\n"
     bad_msg = "That's bad news! 😱 Either fix the issue or run `pytest --snapshot-update` to update the snapshots.\n"
     message = "\n"
+    for keys_name in keys_diff:
+        keys_diff[keys_name] = sorted(keys_diff[keys_name])
     if len(keys_diff["added"]) > 0:
-        message += f"New violations found: {','.join(keys_diff['added'])}\n{bad_msg}"
+        message += f"New violations found: {', '.join(keys_diff['added'])}\n{bad_msg}"
         for violation in keys_diff["added"]:
             violation_id = violation.split(" (")[0]
             message += new_results.generate_report(violation_id=violation_id)
