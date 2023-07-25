@@ -65,7 +65,7 @@ def axe_pytest_snapshot(request, snapshot):
     def run_assert(page: Page):
         results = Axe().run(page)
         if print_reports:
-            print(f"Violations found for {page.title()}:")
+            print(f"\n\n** {request.node.name} report from axe-playwright **")
             print(results.generate_report())
         snapshot.assert_match(
             results.generate_snapshot(), message_generator=functools.partial(compare_violations, new_results=results)
