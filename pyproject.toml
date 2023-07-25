@@ -1,16 +1,17 @@
 [project]
 name = "pytest-axe-playwright-snapshot"
 description = "A pytest plugin that runs Axe-core on Playwright pages and takes snapshots of the results."
-version = "0.0.1"
+version = "0.0.2"
 authors = [{name = "Pamela Fox"}]
 requires-python = ">=3.8"
 readme = "README.md"
 license = {file = "LICENSE"}
 dependencies = [
     "pytest",
-    "axe-playwright-python",
+    "pytest-cov",
     "playwright",
-    "pytest-snapshot @ git+https://github.com/pamelafox/pytest-snapshot.git@addcallback"
+    "axe-playwright-python",
+    "pytest-snapshot-with-message-generator"
     ]
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -34,6 +35,7 @@ dev = [
     "pre-commit",
     "ruff",
     "black",
+    "flit",
 ]
 
 [project.entry-points.pytest11]
@@ -56,6 +58,9 @@ show-source = true
 [tool.black]
 line-length = 120
 target-version = ["py38"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov"
 
 [tool.coverage.run]
 branch = true

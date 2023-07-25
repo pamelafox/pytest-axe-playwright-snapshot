@@ -50,11 +50,20 @@ def compare_violations(new_snapshot, old_snapshot, new_results):
         message += f"Fewer instances of existing violations were found: {','.join(keys_diff['decreased'])}.\n{good_msg}"
     return message
 
+def pytest_addoption(parser):
+    group = parser.getgroup('axe_playwright_snapshot')
+    group.addoption("--print-reports", action="store_true", default=False,
+                    help="Print full reports for violations to stdout")
+
 
 @pytest.fixture
-def axe_pytest_snapshot(snapshot):
+def axe_pytest_snapshot(request, snapshot):
+    print_reports = request.config.getoption("print_reports")
     def run_assert(page: Page):
         results = Axe().run(page)
+        if print_reports:
+            print(f"Violations found for {page.title()}:")
+            print(results.generate_report)
         snapshot.assert_match(
             results.generate_snapshot(), message_generator=functools.partial(compare_violations, new_results=results)
         )
