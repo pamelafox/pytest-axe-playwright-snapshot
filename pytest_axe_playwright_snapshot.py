@@ -66,7 +66,7 @@ def axe_pytest_snapshot(request, snapshot):
         results = Axe().run(page)
         if print_reports:
             print(f"Violations found for {page.title()}:")
-            print(results.generate_report)
+            print(results.generate_report())
         snapshot.assert_match(
             results.generate_snapshot(), message_generator=functools.partial(compare_violations, new_results=results)
         )
