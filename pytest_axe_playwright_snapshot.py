@@ -33,7 +33,7 @@ def compare_violations(new_snapshot, old_snapshot, new_results):
             keys_diff["added"].add(key)
     good_msg = "That's good news! 🎉 Run `pytest --snapshot-update` to update the snapshots.\n"
     bad_msg = "That's bad news! 😱 Either fix the issue or run `pytest --snapshot-update` to update the snapshots.\n"
-    message = "\n"
+    message = ""
     for keys_name in keys_diff:
         keys_diff[keys_name] = sorted(keys_diff[keys_name])
     if len(keys_diff["added"]) > 0:
