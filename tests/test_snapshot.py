@@ -11,9 +11,7 @@ def test_violations_new_from_empty(page: Page, axe_pytest_snapshot):
     try:
         axe_pytest_snapshot(page)
     except AssertionError as err:
-        assert (
-            str(err)
-            == """\
+        assert str(err) == """\
 New violations found: html-has-lang (serious), landmark-one-main (moderate), region (moderate)
 That's bad news! 😱 Either fix the issue or run `pytest --snapshot-update` to update the snapshots.
 Rule Violated:
@@ -53,7 +51,6 @@ region - Ensures all page content is contained by landmarks
 		Messages:
 		* Some page content is not contained by landmarks
 """
-        )
 
 
 def test_violations_new(page: Page, axe_pytest_snapshot):
@@ -61,9 +58,7 @@ def test_violations_new(page: Page, axe_pytest_snapshot):
     try:
         axe_pytest_snapshot(page)
     except AssertionError as err:
-        assert (
-            str(err)
-            == """\
+        assert str(err) == """\
 New violations found: html-has-lang (serious)
 That's bad news! 😱 Either fix the issue or run `pytest --snapshot-update` to update the snapshots.
 Rule Violated:
@@ -79,7 +74,6 @@ html-has-lang - Ensures every HTML document has a lang attribute
 		Messages:
 		* The <html> element does not have a lang attribute
 """
-        )
 
 
 def test_violations_fixed(page: Page, axe_pytest_snapshot):
@@ -87,13 +81,10 @@ def test_violations_fixed(page: Page, axe_pytest_snapshot):
     try:
         axe_pytest_snapshot(page)
     except AssertionError as err:
-        assert (
-            str(err)
-            == """\
+        assert str(err) == """\
 Old violations no longer found: color-contrast (moderate).
 That's good news! 🎉 Run `pytest --snapshot-update` to update the snapshots.
 """
-        )
 
 
 def test_violations_more_instances(page: Page, axe_pytest_snapshot):
@@ -101,9 +92,7 @@ def test_violations_more_instances(page: Page, axe_pytest_snapshot):
     try:
         axe_pytest_snapshot(page)
     except AssertionError as err:
-        assert (
-            str(err)
-            == """\
+        assert str(err) == """\
 Additional instances of existing violations were found: html-has-lang (serious)
 That's bad news! 😱 Either fix the issue or run `pytest --snapshot-update` to update the snapshots.
 Rule Violated:
@@ -119,7 +108,6 @@ html-has-lang - Ensures every HTML document has a lang attribute
 		Messages:
 		* The <html> element does not have a lang attribute
 """
-        )
 
 
 def test_violations_fewer_instances(page: Page, axe_pytest_snapshot):
@@ -127,10 +115,7 @@ def test_violations_fewer_instances(page: Page, axe_pytest_snapshot):
     try:
         axe_pytest_snapshot(page)
     except AssertionError as err:
-        assert (
-            str(err)
-            == """\
+        assert str(err) == """\
 Fewer instances of existing violations were found: region (moderate).
 That's good news! 🎉 Run `pytest --snapshot-update` to update the snapshots.
 """
-        )
